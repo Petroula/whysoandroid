@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 class HttpRequest extends AsyncTask<String, Void, String> {
 
-	static final String ip = "10.0.2.2";// "129.16.155.25";
+	static final String ip = "129.16.155.25";
 	static final String port = "10111";
 	static final String urlbegin = "http://" + ip + ":" + port
 			+ "/esi/esi_facade:";

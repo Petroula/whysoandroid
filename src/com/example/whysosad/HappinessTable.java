@@ -27,7 +27,7 @@ public class HappinessTable extends TableLayout {
 		this.context = getContext();
 	}
 
-	public void addRow(String countryname, String value) {
+	public void addRow(String countryname, String value, final ResultsActivity resultsActivity) {
 		final TableRow row = new TableRow(getContext());
 		TextView country = new TextView(getContext());
 		
@@ -60,7 +60,7 @@ public class HappinessTable extends TableLayout {
 					public void onClick(final DialogInterface dialog,
 							final int which) {
 						alert.dismiss();
-						row.setBackgroundColor(Color.BLACK);
+						row.setBackgroundColor(Color.TRANSPARENT);
 					}
 				});
 				alert.setCanceledOnTouchOutside(false);
@@ -76,11 +76,11 @@ public class HappinessTable extends TableLayout {
 						TextView selectedK = (TextView) tr.getChildAt(1);
 						String selectedCountry = selectedC.getText().toString();
 						String selectedKey = selectedK.getText().toString();
-						Intent changeView = new Intent(context,
+						Intent changeView = new Intent(resultsActivity,
 								BetActivity.class);
 						changeView.putExtra("country", selectedCountry);
 						changeView.putExtra("key", selectedKey);
-						context.startActivity(changeView);
+						resultsActivity.startActivity(changeView);
 					}
 				});
 

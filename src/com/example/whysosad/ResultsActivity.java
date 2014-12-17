@@ -71,7 +71,7 @@ public class ResultsActivity extends Activity implements OnClickListener {
 				if (countries.containsKey(countrycode)) {
 					String printCountry = countries.get(countrycode);
 					String printValue = "" + jsonObj.get(countrycode);
-					happytable.addRow(printCountry, printValue);
+					happytable.addRow(printCountry, printValue,this);
 				}
 			}
 			
