@@ -35,150 +35,74 @@ import android.widget.TextView;
  * 
  */
 
-public class ResultsActivity extends Activity implements OnClickListener{
+public class ResultsActivity extends Activity implements OnClickListener {
 
-	String printCountry = "";
-	String printKey;
-	JSONObject jsonObj;
-	Button refresh;	
+	Button refresh;
 	HashMap<String, String> countries = new HashMap();
-	ArrayList<String> listCountry = new ArrayList<String>();
-	ArrayList<String> listKey = new ArrayList<String>();
-	TableLayout table;
-	TableRow tableRow1;
 	String selectedCountry;
 	String selectedKey;
-	
+	HappinessTable happytable;
+
 	protected void onCreate(Bundle savedInstanceState) {
-    	super.onCreate(savedInstanceState);
-    	setContentView(R.layout.results);
-    	createHashMap();
-    	
-    	table = (TableLayout)findViewById(R.id.mytable);
-    	tableRow1 = (TableRow)findViewById(R.id.tableRow1);
-    	refresh = (Button)findViewById(R.id.refresh);
-    	refresh.setOnClickListener(this);
-    	
-    	String result = ClientToServer.currentHappiness();
-    	OnRefresh(result);
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.results);
+		createHashMap();
+
+		happytable = (HappinessTable) findViewById(R.id.happinessTable);
+		refresh = (Button) findViewById(R.id.refresh);
+		refresh.setOnClickListener(this);
+
+		String result = ClientToServer.currentHappiness();
+		OnRefresh(result);
 	}
-	
-        protected void OnRefresh(String response) {
-        	        	
-	
-			try {
-				
-				jsonObj = new JSONObject(response.trim());
-		        Iterator<?> keys = jsonObj.keys();
 
-		        while(keys.hasNext()){
-		            String key = (String)keys.next();		
-		            if (countries.containsKey(key)){
-		            	printCountry = countries.get(key);
-		            	printKey = "" + jsonObj.get(key);
-		            	listCountry.add(printCountry);
-		            	listKey.add(printKey);
-		            }		            
-		        }	
-        
-		        
-		        /** Dynamically create table rows for displaying the results received from the server */		
-		        for(int i=0; i<listCountry.size(); i++) {
-					final TableRow row=new TableRow(ResultsActivity.this);
-					TextView country=new TextView(ResultsActivity.this);
-					country.setText(listCountry.get(i));
-					country.setTextColor(Color.BLUE);
-					country.setTextSize(30);
-					country.setGravity(Gravity.CENTER);
-					TextView key=new TextView(ResultsActivity.this);
-					key.setText(listKey.get(i));
-					key.setTextSize(30);
-					key.setGravity(Gravity.CENTER);
-					
-					row.setClickable(true);
-					row.setOnClickListener(new OnClickListener() {
-						
-						
-						/** Displays a dialog box after clicking on any of the table rows */
-						@SuppressWarnings("deprecation")
-						public void onClick(final View v) {
-							row.setBackgroundColor(Color.GRAY);
-		                	final AlertDialog alert = new AlertDialog.Builder(ResultsActivity.this).create();
-		            		alert.setTitle("*Bet*"); 
-		            		alert.setMessage("Do you want to place a bet?");
-//		            		alert.setIcon(R.drawable.reset_pic); 
-		            		alert.setButton("No", new DialogInterface.OnClickListener() {
-		            			public void onClick(final DialogInterface dialog, final int which) {
-		            				alert.dismiss();
-		            				row.setBackgroundColor(Color.BLACK);
-		            			}
-	            			});
-		            		alert.setCanceledOnTouchOutside(false);	
-		            		alert.setButton2("Yes", new DialogInterface.OnClickListener() {
-		            			public void onClick(DialogInterface dialog, int which) {
-		            				
-		            				/** Get the info from the selected row and pass it to the other activity */
-		            				TableRow tr = (TableRow) v;
-		            				TextView selectedC = (TextView) tr.getChildAt(0);
-		            				TextView selectedK = (TextView) tr.getChildAt(1);		            				
-		            				selectedCountry = selectedC.getText().toString();
-		            				selectedKey = selectedK.getText().toString();		            				
-		            				Intent changeView = new Intent(getApplicationContext(), BetActivity.class);		            						            				
-		            				changeView.putExtra("country", selectedCountry);
-		            				changeView.putExtra("key", selectedKey);
-		            				
-		            				startActivity(changeView);	            				
-		            				
-		            				overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
-		            				}
-		            			});
-		            		alert.setCanceledOnTouchOutside(false);
-		            		alert.show();
-		            		}
-		                });									
-					
-					if(Integer.parseInt(listKey.get(i))<0) {
-						key.setTextColor(Color.RED);
-					} else if(Integer.parseInt(listKey.get(i))==0) {
-						key.setTextColor(Color.YELLOW);
-					} else {
-						key.setTextColor(Color.GREEN);
-					}
-					row.addView(country);
-					row.addView(key);
-					table.addView(row);
+	protected void OnRefresh(String response) {
+
+		try {
+			JSONObject jsonObj = new JSONObject(response.trim());
+			Iterator<?> countrycodes = jsonObj.keys();
+
+			/**
+			 * Dynamically create table rows for displaying the results received
+			 * from the server
+			 */
+			while (countrycodes.hasNext()) {
+				String countrycode = (String) countrycodes.next();
+				if (countries.containsKey(countrycode)) {
+					String printCountry = countries.get(countrycode);
+					String printValue = "" + jsonObj.get(countrycode);
+					happytable.addRow(printCountry, printValue);
 				}
-     		} catch (JSONException e) {				
-				e.printStackTrace();
-			} 		
-    	}
-	
-    private void createHashMap(){
- 	   countries.put("TR", "Turkey");
- 	   countries.put("BR", "Brazil");
- 	   countries.put("US", "USA");
- 	   countries.put("ID", "Indonesia");
- 	   countries.put("AR", "Argentina");
- 	   countries.put("PH", "Philippines");
- 	   countries.put("SE", "Sweden");
- 	   countries.put("NO", "Norway");
- 	   countries.put("MX", "Mexico");
- 	   countries.put("VE", "Venezuela");
- 	   countries.put("GT", "Guatemala");
- 	   countries.put("RU", "Russia");
- 	   countries.put("CO", "Colombia");
- 	   countries.put("IN", "India");
- 	   countries.put("GB", "Great Britain");
-    }
+			}
+			
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
 
-    
-    /** Refreshes the results from the server */
+	private void createHashMap() {
+		countries.put("TR", "Turkey");
+		countries.put("BR", "Brazil");
+		countries.put("US", "USA");
+		countries.put("ID", "Indonesia");
+		countries.put("AR", "Argentina");
+		countries.put("PH", "Philippines");
+		countries.put("SE", "Sweden");
+		countries.put("NO", "Norway");
+		countries.put("MX", "Mexico");
+		countries.put("VE", "Venezuela");
+		countries.put("GT", "Guatemala");
+		countries.put("RU", "Russia");
+		countries.put("CO", "Colombia");
+		countries.put("IN", "India");
+		countries.put("GB", "Great Britain");
+	}
+
+	/** Refreshes the results from the server */
 	@Override
 	public void onClick(View v) {
-		if(v.getId()==R.id.refresh) {			
-			table.removeAllViews();
-			listCountry.clear();
-			listKey.clear();
+		if (v.getId() == R.id.refresh) {
+			happytable.removeAllViews();
 			String Result = ClientToServer.currentHappiness();
 			OnRefresh(Result);
 		}
