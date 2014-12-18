@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,6 +22,7 @@ import android.widget.Button;
 public class ResultsActivity extends Activity implements OnClickListener {
 
 	Button refresh;
+	Button map_button;
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	HashMap<String, String> countries = new HashMap();
 	String selectedCountry;
@@ -35,6 +37,8 @@ public class ResultsActivity extends Activity implements OnClickListener {
 		happytable = (HappinessTable) findViewById(R.id.happinessTable);
 		refresh = (Button) findViewById(R.id.refresh);
 		refresh.setOnClickListener(this);
+		map_button = (Button) findViewById(R.id.map_button);
+		map_button.setOnClickListener(this);
 
 		String result = ClientToServer.currentHappiness();
 		OnRefresh(result);
@@ -89,6 +93,9 @@ public class ResultsActivity extends Activity implements OnClickListener {
 			happytable.removeAllViews();
 			String Result = ClientToServer.currentHappiness();
 			OnRefresh(Result);
+		} else if(v.getId() == R.id.map_button) {
+			Intent changeView = new Intent(getApplicationContext(), WebActivity.class);
+			startActivity(changeView);		
 		}
 	}
 }

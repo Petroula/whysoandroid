@@ -15,10 +15,30 @@
         android:id="@+id/happinessTable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_above="@+id/map_button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/refresh"
         android:stretchColumns="0,1" >
 
     </com.example.whysosad.HappinessTable>
+
+    <Button
+        android:id="@+id/bets_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:text="Bets" />
+
+    <Button
+        android:id="@+id/map_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bets_button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:text="Show Map" />
 
 </RelativeLayout>
