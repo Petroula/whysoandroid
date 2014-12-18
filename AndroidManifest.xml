@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.whysosad"
+    package="pegasus.Whysosad"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -34,15 +34,14 @@
             android:name=".BetActivity"
             android:screenOrientation="portrait" >
         </activity>
+                <activity
+            android:name=".BetResultsActivity"
+            android:screenOrientation="portrait" >
+        </activity>
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateVisible" >
-        </activity>
-        <activity
-            android:name=".WebActivity"
-            android:screenOrientation="landscape"
-            android:label="@string/title_activity_web" >
         </activity>
     </application>
 

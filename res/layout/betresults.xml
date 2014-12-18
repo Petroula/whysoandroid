@@ -3,7 +3,7 @@
     android:layout_height="fill_parent" >
 
     <Button
-        android:id="@+id/refresh"
+        android:id="@+id/refresh1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -11,22 +11,22 @@
         android:layout_alignParentTop="true"
         android:text="Refresh" />
 
-    <pegasus.Whysosad.HappinessTable
-        android:id="@+id/happinessTable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:stretchColumns="0,1" >
-
-    </pegasus.Whysosad.HappinessTable>
-
     <Button
-        android:id="@+id/bets_button"
+        android:id="@+id/results_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Bets" />
+        android:text="Countries" />
+
+    <pegasus.Whysosad.BetsTable
+        android:id="@+id/betsTable1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:stretchColumns="0,1,2" >
+
+    </pegasus.Whysosad.BetsTable>
 
 </RelativeLayout>

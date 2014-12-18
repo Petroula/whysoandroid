@@ -2,7 +2,5 @@
 <resources>
 
     <string name="app_name">Why So Sad?</string>
-    <string name="title_activity_web">Why So Sad</string>
-    <string name="hello_world">Hello world!</string>
 
 </resources>
