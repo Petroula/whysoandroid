@@ -70,10 +70,15 @@ public class BetActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		
 		if(v.getId()==R.id.done) {
+			
+			Intent changeView = getIntent();
+	    	betCountry = changeView.getStringExtra("country");
+	    	betKey = changeView.getStringExtra("key");
+			
 			hour = timePicker1.getCurrentHour() + "";
 			minutes =  timePicker1.getCurrentMinute() + "";
 			
-			String s = new ClientToServer().registerUser();
+			String s = new ClientToServer().placeBet(User.username, User.password, betCountry, hour, minutes, predictLevel, "10");
 			
 			textView2.setText(s);
 //			textView3.setText(minutes);

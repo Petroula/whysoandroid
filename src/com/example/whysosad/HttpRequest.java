@@ -11,9 +11,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import android.app.AlertDialog;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 class HttpRequest extends AsyncTask<String, Void, String> {
 

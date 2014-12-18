@@ -1,21 +1,11 @@
 package com.example.whysosad;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import org.apache.http.NameValuePair;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.os.AsyncTask;
 
@@ -29,19 +19,17 @@ public class ClientToServer {
 
 	static String response = "";
 	
-	BetActivity bet = new BetActivity();
-	
-	public String placeBet() {
+	public String placeBet(String username, String mPassword, String betCountry, String hour, String minutes, String predictLevel, String credits) {
 
     	ArrayList<NameValuePair>parameters = new ArrayList<NameValuePair>();
-	    parameters.add(new BasicNameValuePair("user", "petra"));
-	    parameters.add(new BasicNameValuePair("password", "davidishappy"));
-	    parameters.add(new BasicNameValuePair("country", bet.betCountry));
-	    parameters.add(new BasicNameValuePair("hour", bet.hour));
-	    parameters.add(new BasicNameValuePair("minute", bet.minutes));
-	    parameters.add(new BasicNameValuePair("targetstatus", bet.predictLevel));
-	    parameters.add(new BasicNameValuePair("credits", "10"));
-
+	    parameters.add(new BasicNameValuePair("user", username));
+	    parameters.add(new BasicNameValuePair("password", mPassword));
+	    parameters.add(new BasicNameValuePair("country", betCountry));
+	    parameters.add(new BasicNameValuePair("hour", hour));
+	    parameters.add(new BasicNameValuePair("minute", minutes));
+	    parameters.add(new BasicNameValuePair("targetstatus", predictLevel));
+	    parameters.add(new BasicNameValuePair("credits", credits));
+	    
 	    return syncRequest("place_bet", parameters);
 	}
     
@@ -53,16 +41,6 @@ public class ClientToServer {
 	    
 	    return syncRequest("current_happiness", parameters);
     }
-	
-	
-    public String registerUser() {
-
-    	ArrayList<NameValuePair> parameters = new ArrayList<NameValuePair>();
-	    parameters.add(new BasicNameValuePair("user", "pikachu"));
-	    parameters.add(new BasicNameValuePair("password", "Pegasus!1291615525"));
-	    
-	    return syncRequest("register_user", parameters);
-	}
 	
     private static void aSyncRequest(String urlAppend,List<NameValuePair> params,HttpCallback callback){
 		HttpRequest Request = new HttpRequest(urlAppend,params,callback);

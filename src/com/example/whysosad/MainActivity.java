@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
 		}
 		public void onFinish() {
 		
-			Intent changeView = new Intent(getApplicationContext(), ResultsActivity.class);
+			Intent changeView = new Intent(getApplicationContext(), LoginActivity.class);
 			startActivity(changeView);
 		}
 		}.start();
