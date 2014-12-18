@@ -89,13 +89,23 @@ public class ResultsActivity extends Activity implements OnClickListener {
 	/** Refreshes the results from the server */
 	@Override
 	public void onClick(View v) {
-		if (v.getId() == R.id.refresh) {
+		switch (v.getId()) {
+		case R.id.refresh:
 			happytable.removeAllViews();
 			String Result = ClientToServer.currentHappiness();
 			OnRefresh(Result);
-		} else if(v.getId() == R.id.map_button) {
-			Intent changeView = new Intent(getApplicationContext(), WebActivity.class);
+			break;
+		case R.id.bets_button:
+			Intent changeView = new Intent(getApplicationContext(),
+					BetResultsActivity.class);
+			startActivity(changeView);
+			break;
+					
+		case R.id.map_button:
+		Intent changeView = new Intent(getApplicationContext(), WebActivity.class);
 			startActivity(changeView);		
-		}
+		default:
+			break;
+		} 
 	}
 }
