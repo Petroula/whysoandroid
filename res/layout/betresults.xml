@@ -16,17 +16,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Countries" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:text="← Back to Countries" />
 
     <pegasus.Whysosad.BetsTable
         android:id="@+id/betsTable1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_above="@+id/credits_left"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/refresh1"
         android:stretchColumns="0,1,2" >
 
     </pegasus.Whysosad.BetsTable>
+
+    <TextView
+        android:id="@+id/credits_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/results_button"
+        android:layout_alignParentRight="true"
+        android:text="Credits" />
 
 </RelativeLayout>

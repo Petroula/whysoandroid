@@ -59,21 +59,12 @@
         android:layout_marginTop="100dp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/timePicker1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="18dp"
-        android:text="TextView" />
+        android:text="" />
 
 </RelativeLayout>

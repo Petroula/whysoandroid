@@ -88,4 +88,12 @@ public class ClientToServer {
 
 	    return syncRequest("get_all_bets", parameters);
 	}
+	
+	public static String getCredits(String username, String password) {
+		ArrayList<NameValuePair> parameters = new ArrayList<NameValuePair>();
+	    parameters.add(new BasicNameValuePair("user", username));
+	    parameters.add(new BasicNameValuePair("password", password));
+		
+	    return syncRequest("get_user_credits", parameters);		
+	}
 }

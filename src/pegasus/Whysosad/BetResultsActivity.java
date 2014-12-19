@@ -8,12 +8,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 public class BetResultsActivity extends Activity implements OnClickListener {
 
@@ -22,11 +27,16 @@ public class BetResultsActivity extends Activity implements OnClickListener {
 	String selectedCountry;
 	String selectedKey;
 	BetsTable betstable;
+	TextView credits_left;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.betresults);
 
+		credits_left = (TextView)findViewById(R.id.credits_left);
+		User.credits = ClientToServer.getCredits(User.username, User.password);
+		credits_left.setText("Remaining Credits:"+User.credits);
+		
 		betstable = (BetsTable) findViewById(R.id.betsTable1);
 		refresh = (Button) findViewById(R.id.refresh1);
 		refresh.setOnClickListener(this);
@@ -60,13 +70,13 @@ public class BetResultsActivity extends Activity implements OnClickListener {
 				int targettime = bet.getInt("targettime");
 				
 				betstable.addRow(countrycode, status,odds,credits,targettime,this);
-			}
-			
+			}				
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 	}
 
+	
 	/** Refreshes the results from the server */
 	
 	@Override

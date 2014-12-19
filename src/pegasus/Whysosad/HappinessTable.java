@@ -47,14 +47,12 @@ public class HappinessTable extends TableLayout {
 			/**
 			 * Displays a dialog box after clicking on any of the table rows
 			 */
-			@SuppressWarnings("deprecation")
 			public void onClick(final View v) {
 				row.setBackgroundColor(Color.GRAY);
 				final AlertDialog alert = new AlertDialog.Builder(getContext())
 						.create();
 				alert.setTitle("*Bet*");
 				alert.setMessage("Do you want to place a bet?");
-				// alert.setIcon(R.drawable.reset_pic);
 				alert.setButton(DialogInterface.BUTTON_NEGATIVE,"No", new DialogInterface.OnClickListener() {
 					public void onClick(final DialogInterface dialog,
 							final int which) {
