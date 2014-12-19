@@ -24,8 +24,6 @@ public class ResultsActivity extends Activity implements OnClickListener {
 
 	Button refresh;
 	Button map_button;
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	HashMap<String, String> countries = new HashMap();
 	String selectedCountry;
 	String selectedKey;
 	HappinessTable happytable;
@@ -34,7 +32,6 @@ public class ResultsActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.results);
-		createHashMap();
 
 		map_button = (Button)findViewById(R.id.map_button);
 		map_button.setOnClickListener(this);
@@ -64,8 +61,8 @@ public class ResultsActivity extends Activity implements OnClickListener {
 			 */
 			while (countrycodes.hasNext()) {
 				String countrycode = (String) countrycodes.next();
-				if (countries.containsKey(countrycode)) {
-					String printCountry = countries.get(countrycode);
+				if (Converter.countries.containsKey(countrycode)) {
+					String printCountry = Converter.convert(countrycode);
 					String printValue = "" + jsonObj.get(countrycode);
 					happytable.addRow(printCountry, printValue,this);
 				}
@@ -74,24 +71,6 @@ public class ResultsActivity extends Activity implements OnClickListener {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-	}
-
-	private void createHashMap() {
-		countries.put("TR", "Turkey");
-		countries.put("BR", "Brazil");
-		countries.put("US", "USA");
-		countries.put("ID", "Indonesia");
-		countries.put("AR", "Argentina");
-		countries.put("PH", "Philippines");
-		countries.put("SE", "Sweden");
-		countries.put("NO", "Norway");
-		countries.put("MX", "Mexico");
-		countries.put("VE", "Venezuela");
-		countries.put("GT", "Guatemala");
-		countries.put("RU", "Russia");
-		countries.put("CO", "Colombia");
-		countries.put("IN", "India");
-		countries.put("GB", "Great Britain");
 	}
 
 	/** Refreshes the results from the server */

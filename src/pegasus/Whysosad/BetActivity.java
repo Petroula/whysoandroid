@@ -27,7 +27,7 @@ public class BetActivity extends Activity implements OnClickListener {
 	
 	String betCountry;
 	String betKey;
-	String predictLevel;
+	String predictLevel = "happier";
 	String hour;
 	String minutes;
 	Button done;
@@ -40,7 +40,7 @@ public class BetActivity extends Activity implements OnClickListener {
 	RadioButton bet5;
 	RadioButton bet10;
 	RadioButton bet20;
-	String betChosen = "";
+	String betChosen = "10";
 	TimePicker timePicker1;
 	TextView message;
 	TextView choose_credits;
@@ -91,11 +91,12 @@ public class BetActivity extends Activity implements OnClickListener {
 			Intent changeView = getIntent();
 		    betCountry = changeView.getStringExtra("country");
 			betKey = changeView.getStringExtra("key");
+			String betC = Converter.getcountrycode(betCountry);
 						
 		    hour = timePicker1.getCurrentHour() + "";
 		    minutes =  timePicker1.getCurrentMinute() + "";
 			if(Integer.parseInt(User.credits)>=Integer.parseInt(betChosen)) {
-				String s = new ClientToServer().placeBet(User.username, User.password, betCountry, hour, minutes, predictLevel, betChosen);
+				String s = new ClientToServer().placeBet(User.username, User.password, betC, hour, minutes, predictLevel, betChosen);
 				User.credits = ClientToServer.getCredits(User.username, User.password);
 				message.setText(s);
 			} else {
