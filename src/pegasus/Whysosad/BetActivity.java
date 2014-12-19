@@ -1,5 +1,7 @@
 package pegasus.Whysosad;
 
+import java.util.HashMap;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -35,9 +37,13 @@ public class BetActivity extends Activity implements OnClickListener {
 	CheckBox night;
 	RadioButton increase;
 	RadioButton decrease;
+	RadioButton bet5;
+	RadioButton bet10;
+	RadioButton bet20;
+	String betChosen = "";
 	TimePicker timePicker1;
 	TextView message;
-	
+	TextView choose_credits;
 	
 	protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
@@ -50,10 +56,19 @@ public class BetActivity extends Activity implements OnClickListener {
     	back = (Button)findViewById(R.id.back);
     	back.setOnClickListener(this);
     	textView1 = (TextView)findViewById(R.id.textView1);
+    	choose_credits = (TextView)findViewById(R.id.choose_credits);
     	increase = (RadioButton)findViewById(R.id.increase);
     	increase.setOnClickListener(this);
     	decrease = (RadioButton)findViewById(R.id.decrease);
     	decrease.setOnClickListener(this);
+    	bet5 = (RadioButton)findViewById(R.id.bet5);
+    	bet5.setOnClickListener(this);
+    	bet10 = (RadioButton)findViewById(R.id.bet10);
+    	bet10.setOnClickListener(this);
+    	bet20 = (RadioButton)findViewById(R.id.bet20);
+    	bet20.setOnClickListener(this);
+    	increase.setChecked(true);
+    	bet10.setChecked(true);
     	
     	timePicker1 = (TimePicker)findViewById(R.id.timePicker1);
 	
@@ -73,21 +88,19 @@ public class BetActivity extends Activity implements OnClickListener {
 		
 		if(v.getId()==R.id.done) {
 			User.credits = ClientToServer.getCredits(User.username, User.password);
-//			if(Integer.parseInt(chooseCr.getText().toString()) > Integer.parseInt(User.credits)) {
-//				message.setText("Not enough credits in your account for this bet!");
-//			 } else {
-				 Intent changeView = getIntent();
-				 betCountry = changeView.getStringExtra("country");
-				 betKey = changeView.getStringExtra("key");
+			Intent changeView = getIntent();
+		    betCountry = changeView.getStringExtra("country");
+			betKey = changeView.getStringExtra("key");
 						
-				hour = timePicker1.getCurrentHour() + "";
-				minutes =  timePicker1.getCurrentMinute() + "";
-						
-//				String s = new ClientToServer().placeBet(User.username, User.password, betCountry, hour, minutes, predictLevel, chooseCr.getText().toString());
-						
+		    hour = timePicker1.getCurrentHour() + "";
+		    minutes =  timePicker1.getCurrentMinute() + "";
+			if(Integer.parseInt(User.credits)>=Integer.parseInt(betChosen)) {
+				String s = new ClientToServer().placeBet(User.username, User.password, betCountry, hour, minutes, predictLevel, betChosen);
 				User.credits = ClientToServer.getCredits(User.username, User.password);
-//				message.setText(s);
-//			 }		
+				message.setText(s);
+			} else {
+				message.setText("Sorry, you don't have enough credits for this bet!");
+			}					
 		} else if(v.getId()==R.id.back) {			
 			Intent changeView = new Intent(getApplicationContext(), ResultsActivity.class);
 			startActivity(changeView);
@@ -97,7 +110,19 @@ public class BetActivity extends Activity implements OnClickListener {
 		} else if(v.getId()==R.id.decrease) {
 			increase.setChecked(false);
 			predictLevel = "sadder";
-		} 
+		} else if(v.getId()==R.id.bet5) {
+			bet10.setChecked(false);
+			bet20.setChecked(false);
+			betChosen = "5";
+		} else if(v.getId()==R.id.bet10) {
+			bet5.setChecked(false);
+			bet20.setChecked(false);
+			betChosen = "10";
+		} else if(v.getId()==R.id.bet20) {
+			bet5.setChecked(false);
+			bet10.setChecked(false);
+			betChosen = "20";
+		}
 		
 	}
 }

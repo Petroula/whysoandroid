@@ -67,4 +67,41 @@
         android:layout_marginTop="32dp"
         android:text="" />
 
+    <TextView
+        android:id="@+id/choose_credits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/decrease"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="28dp"
+        android:text="Credits:" />
+
+    <RadioButton
+        android:id="@+id/bet5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/choose_credits"
+        android:layout_alignBottom="@+id/choose_credits"
+        android:layout_toEndOf="@+id/choose_credits"
+        android:text="5" />
+
+    <RadioButton
+        android:id="@+id/bet10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/bet5"
+        android:layout_alignBottom="@+id/bet5"
+        android:layout_centerHorizontal="true"
+        android:text="10" />
+
+    <RadioButton
+        android:id="@+id/bet20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/bet10"
+        android:layout_alignBottom="@+id/bet10"
+        android:layout_toStartOf="@+id/done"
+        android:text="20" />
+
 </RelativeLayout>
