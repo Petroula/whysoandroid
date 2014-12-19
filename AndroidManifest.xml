@@ -48,6 +48,11 @@
             android:screenOrientation="landscape"
             android:label="Why So Sad?" >
         </activity>
+        <activity
+            android:name=".AboutActivity"
+            android:screenOrientation="portrait"
+            android:label="Why So Sad?" >
+        </activity>
     </application>
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->

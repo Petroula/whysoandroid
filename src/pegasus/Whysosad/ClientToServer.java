@@ -96,4 +96,9 @@ public class ClientToServer {
 		
 	    return syncRequest("get_user_credits", parameters);		
 	}
+	
+	public static String totalUsers() {
+		ArrayList<NameValuePair> parameters = new ArrayList<NameValuePair>();
+		return syncRequest("total_users", parameters);		
+	}
 }

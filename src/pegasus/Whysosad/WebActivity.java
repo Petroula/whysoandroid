@@ -15,6 +15,7 @@ public class WebActivity extends Activity implements OnClickListener {
 
 	Button back;
 	Button reload;
+	Button about;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,9 @@ public class WebActivity extends Activity implements OnClickListener {
 		
 		reload = (Button)findViewById(R.id.reload);
 		reload.setOnClickListener(this);
+		
+		about = (Button)findViewById(R.id.about);
+		about.setOnClickListener(this);
 		
 		showMap();	
 	}
@@ -50,6 +54,10 @@ public class WebActivity extends Activity implements OnClickListener {
 			startActivity(changeView);
 		} else if(v.getId() == R.id.reload) {
 			showMap();
+		} else if(v.getId() == R.id.about) {
+			Intent change = new Intent(getApplicationContext(), AboutActivity.class);
+			startActivity(change);
+			
 		}
 		
 	}
